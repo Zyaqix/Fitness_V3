@@ -84,36 +84,33 @@ class AdminController extends Controller
     }
 
     public function search(Request $request)
-{
-    $user = auth()->user();
-    $keyword = $request->input('keyword');
-    $status = $request->input('status');
-    $startDate = $request->input('start_date');
-    $endDate = $request->input('end_date');
+    {
+        $keyword = $request->input('keyword');
+        $status = $request->input('status');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
 
-    $tasksQuery = $user->tasks();
+        $tasksQuery = Task::query();
 
-    if ($keyword) {
-        $tasksQuery->where(function ($query) use ($keyword) {
-            $query->where('title', 'like', "%$keyword%")
+        if ($keyword) {
+            $tasksQuery->where('title', 'like', "%$keyword%")
                 ->orWhere('description', 'like', "%$keyword%");
-        });
+        }
+
+        if ($status) {
+            $tasksQuery->orWhere('status', $status);
+        }
+
+        if ($startDate) {
+            $tasksQuery->whereDate('start_date', '>=', $startDate);
+        }
+
+        if ($endDate) {
+            $tasksQuery->whereDate('end_date', '<=', $endDate);
+        }
+
+        $tasks = $tasksQuery->get();
+
+        return view('admin.index', compact('tasks'));
     }
-
-    if ($status) {
-        $tasksQuery->where('status', $status);
-    }
-
-    if ($startDate) {
-        $tasksQuery->whereDate('start_date', '>=', $startDate);
-    }
-
-    if ($endDate) {
-        $tasksQuery->whereDate('end_date', '<=', $endDate);
-    }
-
-    $tasks = $tasksQuery->get();
-
-    return view('user.index', compact('tasks'));
-}
 }

@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/admin/update/{task}', [AdminController::class, 'update'])->name('admin.update');
         Route::delete('/admin/destroy/{task}', [AdminController::class, 'destroy'])->name('admin.destroy');
         Route::post('/admin/close/{task}', [AdminController::class, 'close'])->name('admin.close');
+        Route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
     });
 
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
