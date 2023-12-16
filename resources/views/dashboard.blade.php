@@ -8,6 +8,7 @@
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 text-center">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+                <!-- Zyzz Playlist Recommendation Content -->
                 <p class="text-lg mb-4">
                     Welcome to the Zyzz Playlist Recommendation Dashboard! This playlist is perfect for your workout sessions, providing the energy and motivation you need to crush it in the gym.
                 </p>
@@ -17,11 +18,17 @@
 
                 <!-- Link to the Zyzz playlist on YouTube -->
                 <div class="mb-6">
-                    <a href="https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID" style="color: blue; text-decoration: underline;" target="_blank" class="text-blue-500 hover:underline text-lg font-bold underline">
+                    <a href="https://www.youtube.com/watch?v=ssXzkCMdcDQ" style="color: blue; text-decoration: underline;" target="_blank" class="text-blue-500 hover:underline text-lg font-bold underline">
                         🎧 Open Zyzz Playlist on YouTube 🎧
                     </a>
                 </div>
 
+                <!-- Zyzz Image -->
+                <div class="mb-6">
+                    <img src="https://i.ytimg.com/vi/tve1xUuZXrk/maxresdefault.jpg" alt="Zyzz Image" class="mx-auto rounded-lg shadow-lg">
+                </div>
+
+                <!-- Closing Statement -->
                 <p class="text-lg">
                     Keep pushing your limits, and remember: "We're all gonna make it, brah!" 💪
                 </p>
