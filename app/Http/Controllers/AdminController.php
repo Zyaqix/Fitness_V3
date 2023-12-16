@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -32,7 +33,8 @@ class AdminController extends Controller
             'end_date' => 'required|date|after:start_date',
         ]);
 
-        Task::create([
+        // Feladat létrehozása
+        $task = Task::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
@@ -41,6 +43,14 @@ class AdminController extends Controller
             'status' => 'bejegyezve',
             'availability' => true,
         ]);
+
+        // Az összes felhasználó lekérése, akikhez rendelni kell a feladatot
+        $users = User::where('role', '!=', 'admin')->get();
+
+        // Feladat hozzárendelése minden felhasználóhoz
+        foreach ($users as $user) {
+            $user->tasks()->save($task);
+        }
 
         return redirect('/admin')->with('success', 'Feladat létrehozva sikeresen!');
     }
