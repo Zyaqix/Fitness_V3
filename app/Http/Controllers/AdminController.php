@@ -84,17 +84,36 @@ class AdminController extends Controller
     }
 
     public function search(Request $request)
-    {
-        $user = auth()->user();
-        $keyword = $request->input('keyword');
+{
+    $user = auth()->user();
+    $keyword = $request->input('keyword');
+    $status = $request->input('status');
+    $startDate = $request->input('start_date');
+    $endDate = $request->input('end_date');
 
-        $tasks = $user->tasks()
-            ->where('title', 'like', "%$keyword%")
-            ->orWhere('start_date', 'like', "%$keyword%")
-            ->orWhere('end_date', 'like', "%$keyword%")
-            ->orWhere('status', 'like', "%$keyword%")
-            ->get();
+    $tasksQuery = $user->tasks();
 
-        return view('user.index', compact('tasks'));
+    if ($keyword) {
+        $tasksQuery->where(function ($query) use ($keyword) {
+            $query->where('title', 'like', "%$keyword%")
+                ->orWhere('description', 'like', "%$keyword%");
+        });
     }
+
+    if ($status) {
+        $tasksQuery->where('status', $status);
+    }
+
+    if ($startDate) {
+        $tasksQuery->whereDate('start_date', '>=', $startDate);
+    }
+
+    if ($endDate) {
+        $tasksQuery->whereDate('end_date', '<=', $endDate);
+    }
+
+    $tasks = $tasksQuery->get();
+
+    return view('user.index', compact('tasks'));
+}
 }

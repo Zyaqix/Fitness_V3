@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/edit/{task}', [AdminController::class, 'edit'])->name('admin.edit');
         Route::put('/admin/update/{task}', [AdminController::class, 'update'])->name('admin.update');
         Route::delete('/admin/destroy/{task}', [AdminController::class, 'destroy'])->name('admin.destroy');
-        Route::put('/admin/close/{task}', [AdminController::class, 'close'])->name('admin.close');
+        Route::post('/admin/close/{task}', [AdminController::class, 'close'])->name('admin.close');
     });
 
     Route::get('/user', [UserController::class, 'index'])->name('user.index');

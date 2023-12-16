@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2>Felhasználói feladatok</h2>
+<h2>Feladatok</h2>
 
 <form action="{{ route('user.search') }}" method="GET">
     <input type="text" name="keyword" placeholder="Keresés...">
@@ -57,10 +57,10 @@
     </div>
 
     <div>
-        <h3>Lezárt feladatok</h3>
+        <h3>Folyamatban lévő feladatok</h3>
         <ul>
             @foreach ($tasks as $task)
-                @if ($task->status === 'lezarva')
+                @if ($task->status === 'folyamatban')
                     <li>
                         <strong>{{ $task->title }}</strong>
                         <br>
