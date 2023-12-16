@@ -10,7 +10,7 @@ class UserController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $tasks = $user->tasks;
+        $tasks = $user->tasks();
         return view('user.index', compact('tasks'));
     }
 
@@ -28,11 +28,9 @@ class UserController extends Controller
 
     public function search(Request $request)
     {
-        $user = auth()->user();
         $keyword = $request->input('keyword');
 
-        $tasks = $user->tasks()
-            ->where('title', 'like', "%$keyword%")
+        $tasks = Task::where('title', 'like', "%$keyword%")
             ->orWhere('start_date', 'like', "%$keyword%")
             ->orWhere('end_date', 'like', "%$keyword%")
             ->orWhere('status', 'like', "%$keyword%")
