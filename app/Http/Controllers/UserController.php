@@ -29,12 +29,30 @@ class UserController extends Controller
     public function search(Request $request)
     {
         $keyword = $request->input('keyword');
+        $status = $request->input('status');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
 
-        $tasks = Task::where('title', 'like', "%$keyword%")
-            ->orWhere('start_date', 'like', "%$keyword%")
-            ->orWhere('end_date', 'like', "%$keyword%")
-            ->orWhere('status', 'like', "%$keyword%")
-            ->get();
+        $tasksQuery = Task::query();
+
+        if ($keyword) {
+            $tasksQuery->where('title', 'like', "%$keyword%")
+                ->orWhere('description', 'like', "%$keyword%");
+        }
+
+        if ($status) {
+            $tasksQuery->orWhere('status', $status);
+        }
+
+        if ($startDate) {
+            $tasksQuery->whereDate('start_date', '>=', $startDate);
+        }
+
+        if ($endDate) {
+            $tasksQuery->whereDate('end_date', '<=', $endDate);
+        }
+
+        $tasks = $tasksQuery->get();
 
         return view('user.index', compact('tasks'));
     }

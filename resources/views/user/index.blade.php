@@ -13,7 +13,6 @@
             <option value="bejegyezve">Bejegyezve</option>
             <option value="folyamatban">Folyamatban</option>
             <option value="befejezve">Befejezve</option>
-            <!-- További állapotok... -->
         </select>
         <input type="date" name="start_date" placeholder="Kezdés dátuma">
         <input type="date" name="end_date" placeholder="Befejezés dátuma">
@@ -25,7 +24,7 @@
             <h3>Aktív feladatok</h3>
             <ul>
                 @foreach ($tasks as $task)
-                    @if ($task->status !== 'lezarva')
+                    @if ($task->status === 'bejegyezve')
                         <li>
                             <strong>{{ $task->title }}</strong>
                             <br>
@@ -37,21 +36,10 @@
                             <br>
                             Állapot: {{ $task->status }}
 
-                            <!-- Elfogadás gomb -->
-                            @if ($task->status === 'bejegyezve')
-                                <form action="{{ route('user.accept', $task->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit">Elfogadás</button>
-                                </form>
-                            @endif
-
-                            <!-- Befejezés gomb -->
-                            @if ($task->status === 'folyamatban')
-                                <form action="{{ route('user.complete', $task->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit">Befejezés</button>
-                                </form>
-                            @endif
+                            <form action="{{ route('user.accept', $task->id) }}" method="POST">
+                                @csrf
+                                <button type="submit">Elfogadás</button>
+                            z</form>
                         </li>
                     @endif
                 @endforeach
@@ -74,8 +62,35 @@
                             <br>
                             Állapot: {{ $task->status }}
                         </li>
+
+                        <form action="{{ route('user.complete', $task->id) }}" method="POST">
+                            @csrf
+                            <button type="submit">Befejezés</button>
+                        </form>
                     @endif
                 @endforeach
             </ul>
+        </div>
+
+        <div>
+            <h3>Befejezett feladatok</h3>
+            <ul>
+                @foreach ($tasks as $task)
+                    @if ($task->status === 'befejezve')
+                        <li>
+                            <strong>{{ $task->title }}</strong>
+                            <br>
+                            Leírás: {{ $task->description ?? 'Nincs leírás' }}
+                            <br>
+                            Kezdés: {{ $task->start_date }}
+                            <br>
+                            Befejezés: {{ $task->end_date }}
+                            <br>
+                            Állapot: {{ $task->status }}
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
     </div>
 </x-app-layout>
