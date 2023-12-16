@@ -17,8 +17,8 @@
 
                 <!-- Link to the Zyzz playlist on YouTube -->
                 <div class="mb-6">
-                    <a href="https://www.youtube.com/watch?v=ssXzkCMdcDQ" target="_blank" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">
-                        Open Zyzz Playlist on YouTube
+                    <a href="https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID" style="color: blue; text-decoration: underline;" target="_blank" class="text-blue-500 hover:underline text-lg font-bold underline">
+                        🎧 Open Zyzz Playlist on YouTube 🎧
                     </a>
                 </div>
 
@@ -29,12 +29,3 @@
         </div>
     </div>
 </x-app-layout>
-
-
-<div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-            <x-welcome />
-        </div>
-    </div>
-</div>
