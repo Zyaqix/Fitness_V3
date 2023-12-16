@@ -59,6 +59,7 @@ class AdminController extends Controller
             'description' => 'nullable|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
+            'status' => 'required|in:bejegyezve,folyamatban,befejezve,lezarva',
         ]);
 
         $task->update([
@@ -66,6 +67,7 @@ class AdminController extends Controller
             'description' => $request->description,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
+            'status' => $request->status,
         ]);
 
         return redirect('/admin')->with('success', 'Feladat módosítva sikeresen!');

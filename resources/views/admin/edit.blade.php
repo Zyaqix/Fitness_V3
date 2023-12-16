@@ -25,6 +25,17 @@
                             <x-input id="description" class="block mt-1 w-full" name="description" :value="old('description', $task->description)" />
                         </div>
 
+                        <!-- Státusz -->
+                        <div class="mt-4">
+                            <x-label for="status" :value="__('Állapot')" />
+                            <select id="status" name="status" class="block mt-1 w-full">
+                                <option value="bejegyezve" {{ old('status', $task->status) === 'bejegyezve' ? 'selected' : '' }}>Bejegyezve</option>
+                                <option value="folyamatban" {{ old('status', $task->status) === 'folyamatban' ? 'selected' : '' }}>Folyamatban</option>
+                                <option value="befejezve" {{ old('status', $task->status) === 'befejezve' ? 'selected' : '' }}>Befejezve</option>
+                                <option value="lezarva" {{ old('status', $task->status) === 'lezarva' ? 'selected' : '' }}>Lezárva</option>
+                            </select>
+                        </div>
+
                         <!-- Kezdési dátum -->
                         <div class="mt-4">
                             <x-label for="start_date" :value="__('Kezdési dátum')" />
