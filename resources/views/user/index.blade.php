@@ -39,7 +39,7 @@
                             <form action="{{ route('user.accept', $task->id) }}" method="POST">
                                 @csrf
                                 <button type="submit">Elfogadás</button>
-                            z</form>
+                            </form>
                         </li>
                     @endif
                 @endforeach

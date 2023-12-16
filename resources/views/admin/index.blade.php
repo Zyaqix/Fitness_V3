@@ -89,15 +89,14 @@
                             <br>
                             Állapot: {{ $task->status }}
                         </li>
+
+                        <a href="{{ route('admin.edit', $task->id) }}">Módosítás</a>
+    
+                        <form method="POST" action="{{ route('admin.close', $task->id) }}">
+                            @csrf
+                            <button type="submit">Lezárás</button>
+                        </form>
                     @endif
-    
-                    <a href="{{ route('admin.edit', $task->id) }}">Módosítás</a>
-    
-                    <form method="POST" action="{{ route('admin.close', $task->id) }}">
-                        @csrf
-                        <button type="submit">Lezárás</button>
-                    </form>
-    
                 @endforeach
             </ul>
         </div>
@@ -118,9 +117,9 @@
                             <br>
                             Állapot: {{ $task->status }}
                         </li>
+                        
+                        <a href="{{ route('admin.edit', $task->id) }}">Módosítás</a>
                     @endif
-    
-                    <a href="{{ route('admin.edit', $task->id) }}">Módosítás</a>
                 @endforeach
             </ul>
         </div>
