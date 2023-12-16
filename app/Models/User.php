@@ -62,11 +62,11 @@ class User extends Authenticatable
 
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return Task::all();
     }
 
     public function isAdmin()
     {
         return $this->role === 'admin';
-}
+    }
 }

@@ -10,7 +10,7 @@ class UserController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $tasks = $user->tasks;
+        $tasks = $user->tasks();
         return view('user.index', compact('tasks'));
     }
 

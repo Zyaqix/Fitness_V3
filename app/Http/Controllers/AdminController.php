@@ -35,7 +35,6 @@ class AdminController extends Controller
 
         // Feladat létrehozása
         $task = Task::create([
-            'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
             'start_date' => $request->start_date,
@@ -44,13 +43,6 @@ class AdminController extends Controller
             'availability' => true,
         ]);
 
-        // Az összes felhasználó lekérése, akikhez rendelni kell a feladatot
-        $users = User::where('role', '!=', 'admin')->get();
-
-        // Feladat hozzárendelése minden felhasználóhoz
-        foreach ($users as $user) {
-            $user->tasks()->save($task);
-        }
 
         return redirect('/admin')->with('success', 'Feladat létrehozva sikeresen!');
     }
